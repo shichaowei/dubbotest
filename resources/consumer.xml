@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+    <dubbo:application name="client" />
+    <dubbo:registry address="${dubbo.registry.addresss}" />
+    <!-- 用户服务-->
+    <dubbo:reference id="userInfoService" interface="com.edianniu.mis.service.dubbo.UserInfoService"  timeout="10000" retries="1" version="1.0" check="false"/>
+    <!-- 车辆服务 -->
+    <dubbo:reference id="carInfoService" interface="com.edianniu.mis.service.dubbo.CarInfoService"  timeout="10000" retries="1" version="1.0" check="false"/>
+    <!-- 网点服务 -->
+    <dubbo:reference id="stationInfoService" interface="com.edianniu.mis.service.dubbo.StationInfoService" timeout="10000" retries="1" version="1.0" check="false"/>
+    <!-- 文件服务 -->
+    <dubbo:reference id="fileUploadService" interface="com.edianniu.mis.service.dubbo.FileUploadService" timeout="10000" retries="1" version="1.0" check="false"/>
+    <!-- 支付服务 -->
+    <dubbo:reference id="payInfoService" interface="com.edianniu.mis.service.dubbo.PayInfoService" timeout="10000" retries="1" version="1.0" check="false"/>
+    <!-- 订单服务 -->
+    <dubbo:reference id="orderInfoService" interface="com.edianniu.mis.service.dubbo.OrderInfoService" timeout="10000" retries="1" version="1.0" check="false"/>
+    <!-- 短信服务 -->
+    <dubbo:reference id="smsSendService" interface="com.edianniu.mis.service.dubbo.SmsSendService" timeout="10000" retries="1" version="1.0" check="false"/>
+</beans>

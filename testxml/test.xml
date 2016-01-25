@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="gbk"?>
+<dogs>
+	<dog id="1">
+		<mobile>17091613448</mobile>
+		<passwd>123456</passwd>
+		<terminalType>1</terminalType>
+		<secretKey>2a7d228d-4dbd-4167-a3dd-882968efd685</secretKey>
+	</dog>
+	
+	<dog id="2">
+		<mobile>17091613448</mobile>
+		<passwd>123456</passwd>
+		<terminalType>1</terminalType>
+		<secretKey>2a7d228d-4dbd-4167-a3dd-882968efd685</secretKey>
+	</dog>
+	
+</dogs>
