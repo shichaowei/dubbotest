@@ -22,7 +22,7 @@
 	<classpathentry kind="lib" path="lib/curator-recipes-2.5.0.jar"/>
 	<classpathentry kind="lib" path="lib/dubbo-2.5.3_netty4.0.18.jar"/>
 	<classpathentry kind="lib" path="lib/edn-mis-client-3.0-sources.jar"/>
-	<classpathentry kind="lib" path="lib/edn-mis-client-3.0.jar"/>
+	<classpathentry kind="lib" path="lib/edn-mis-client-3.0.jar" sourcepath="lib/edn-mis-client-3.0-sources.jar"/>
 	<classpathentry kind="lib" path="lib/fastdfs-client-1.24.jar"/>
 	<classpathentry kind="lib" path="lib/fastjson-1.1.41.jar"/>
 	<classpathentry kind="lib" path="lib/guava-17.0.jar"/>

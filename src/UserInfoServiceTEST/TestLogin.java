@@ -52,29 +52,19 @@ public class TestLogin {
 		Sheet readsheet = readwb.getSheet(0);
 		int rsColumns = readsheet.getColumns();
 		int rsRows = readsheet.getRows();
-		Object[][] test = new Object[rsRows][rsColumns];
+		Object[][] test = new Object[rsRows-1][rsColumns];
 		for (int i = 1; i < rsRows; i++) {
 			for (int j = 0; j < rsColumns; j++) {
 				Cell cell = readsheet.getCell(j, i);
 				if (j == 2 || j == 4)
-					test[i][j] = Integer.parseInt(cell.getContents());
+					test[i-1][j] = Integer.parseInt(cell.getContents());
 				else
-					test[i][j] = cell.getContents();
+					test[i-1][j] = cell.getContents();
 			}
 		}
-		for (int i = 1; i < rsRows; i++) {
-			for (int j = 0; j < rsColumns; j++) {
-				System.out.print(test[i][j] + " ");
-			}
-			System.out.println();
-		}
-
 		readwb.close();
-		// String[][] temp=testdata.getparam("./testxml/test.xml");
-		// System.out.print(test);
+		
 		return Arrays.asList(test);
-		// String[][] temp=testdata.getparam("./testxml/test.xml");
-		// System.out.print(test);
 
 	}
 

@@ -17,6 +17,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.edianniu.mis.bean.car.GetStationResult;
 import com.edianniu.mis.bean.car.NearbyDistanceStations;
+import com.edianniu.mis.bean.car.NearbyDistanceStationsResult;
 import com.edianniu.mis.service.dubbo.StationInfoService;
 
 import jxl.Cell;
@@ -63,7 +64,7 @@ public class TestNearbyDistance
 	ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath*:Test.xml");
     StationInfoService  stationinfo= (StationInfoService) ctx.getBean("stationInfoService");
 
-    private NearbyDistanceStations nearbyDistanceStations;
+    private NearbyDistanceStations nearbyDistanceStations=new NearbyDistanceStations();
     private int exceptcode;
     
 
@@ -80,36 +81,38 @@ public class TestNearbyDistance
 		Sheet readsheet = readwb.getSheet(0);
 		int rsColumns = readsheet.getColumns();
 		int rsRows = readsheet.getRows();
-		NearbyDistanceStations[] test = new NearbyDistanceStations[rsRows-1];
-		for (int i = 1; i < rsRows; i++) {
-			for (int j = 0; j < rsColumns; j++) {
+		Object[][] test = new Object[rsRows-1][rsColumns];
+		for (int i = 1; i < rsRows; i++) 
+		{
+			NearbyDistanceStations temp=new NearbyDistanceStations();
+			int resulttemp=0;
+			for (int j = 0; j < rsColumns; j++) 
+			{
 				Cell cell = readsheet.getCell(j, i);
-				if (j == 0)
+				if (j == 2)
 				{
-					
+					test[i-1][j] = Integer.parseInt(cell.getContents());
+					System.out.print(test[i-1][j]);
 				}
-				else if(j == 2)
-					test[i-1] = Integer.parseInt(cell.getContents());
+				else if(j == 4)
+					test[i-1][j] = Integer.parseInt(cell.getContents());
 				else
-					test[i-1].setLatitude(cell.getContents());
-			}
-		}
-		readwb.close();
-		
-		return Arrays.asList(test);
-	   
-	   
-	
-		
-	   
+					test[i-1][j] = cell.getContents();
 
+			}
+		readwb.close();
+		}
+		return Arrays.asList(test);
 
    } 
     
    // 构造函数，对变量进行初始化 
-   public  TestNearbyDistance()  {
-       this.id  =  id;
-       this.secretkey=secretkey;
+   public  TestNearbyDistance(String latitude,String longitude,int distance,String secretkey,int exceptcodetemp )  {
+	   System.out.println(latitude);
+	   this.nearbyDistanceStations.setLatitude(latitude);
+	   this.nearbyDistanceStations.setLongitude(longitude);
+	   this.nearbyDistanceStations.setDistance(distance);
+	   this.nearbyDistanceStations.setSecretkey(secretkey);
        this.exceptcode=exceptcodetemp;
   } 
    
@@ -117,6 +120,7 @@ public class TestNearbyDistance
 	@Before
 	public void setUp() throws Exception
 	{
+		System.out.println("sssssss");
 	}
 
 	@After
@@ -133,7 +137,7 @@ public class TestNearbyDistance
         int terminalType=1;
         String secretKey="";
        */
-		GetStationResult Result=stationinfo.getStation(id,secretkey);
+		NearbyDistanceStationsResult Result=stationinfo.getStations(nearbyDistanceStations);
         System.out.println("message="+Result.getResultMessage());
         assertEquals(exceptcode,Result.getResultCode());
 	}
